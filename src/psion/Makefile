@@ -16,7 +16,7 @@ SHELL = /bin/sh
 srcdir = .
 top_srcdir = ../..
 
-prefix = /usr/local
+prefix = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/sopwith-1.8.4
 exec_prefix = ${prefix}
 
 bindir = ${exec_prefix}/bin
@@ -24,13 +24,13 @@ sbindir = ${exec_prefix}/sbin
 libexecdir = ${exec_prefix}/libexec
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
-sysconfdir = ${prefix}/etc
+sysconfdir = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot
 sharedstatedir = ${prefix}/com
 localstatedir = ${prefix}/var
 libdir = ${exec_prefix}/lib
 infodir = ${datarootdir}/info
 mandir = ${datarootdir}/man
-includedir = ${prefix}/include
+includedir = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include
 oldincludedir = /usr/include
 
 DESTDIR =
@@ -58,40 +58,40 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_alias = 
+build_alias =
 build_triplet = x86_64-unknown-linux-gnu
-host_alias = 
+host_alias =
 host_triplet = x86_64-unknown-linux-gnu
-target_alias = 
+target_alias =
 target_triplet = x86_64-unknown-linux-gnu
-CC = gcc
+CC = mipsel-linux-gcc
 MAKEINFO = makeinfo
 PACKAGE = sopwith
 PKG_CONFIG = @PKG_CONFIG@
-RANLIB = ranlib
-SDL_CFLAGS = -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
-SDL_CONFIG = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/bin//sdl-config
-SDL_LIBS = -L/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/lib -lSDL -lpthread
+RANLIB = mipsel-linux-ranlib
+SDL_CFLAGS = -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
+SDL_CONFIG = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr//bin/sdl-config
+SDL_LIBS = -L/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/lib -lSDL -lpthread
 SOPWITH_BINS =  sopwith
 SOPWITH_SUBDIRS =  sdl
 VERSION = 1.8.4
 
-CFLAGS = -g -O2 -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -I..
+CFLAGS = -g -O2 -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -I..
 
 noinst_LIBRARIES = libpsopwith.a
 
 libpsopwith_a_SOURCES = timer.c pcsound.c video.c
 mkinstalldirs = $(SHELL) $(top_srcdir)/autotools/mkinstalldirs
 CONFIG_HEADER = ../../config.h
-CONFIG_CLEAN_FILES = 
+CONFIG_CLEAN_FILES =
 LIBRARIES =  $(noinst_LIBRARIES)
 
 
 DEFS = -DHAVE_CONFIG_H -I. -I$(srcdir) -I../..
-CPPFLAGS = 
-LDFLAGS = 
-LIBS = 
-libpsopwith_a_LIBADD = 
+CPPFLAGS =
+LDFLAGS =
+LIBS =
+libpsopwith_a_LIBADD =
 libpsopwith_a_OBJECTS =  timer.o pcsound.o video.o
 AR = ar
 COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
@@ -111,7 +111,7 @@ OBJECTS = $(libpsopwith_a_OBJECTS)
 all: all-redirect
 .SUFFIXES:
 .SUFFIXES: .S .c .o .s
-$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && $(AUTOMAKE) --gnu src/psion/Makefile
 
 Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status $(BUILT_SOURCES)

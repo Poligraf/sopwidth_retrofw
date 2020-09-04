@@ -16,7 +16,7 @@ SHELL = /bin/sh
 srcdir = .
 top_srcdir = ../..
 
-prefix = /usr/local
+prefix = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/sopwith-1.8.4
 exec_prefix = ${prefix}
 
 bindir = ${exec_prefix}/bin
@@ -24,13 +24,13 @@ sbindir = ${exec_prefix}/sbin
 libexecdir = ${exec_prefix}/libexec
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
-sysconfdir = ${prefix}/etc
+sysconfdir = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot
 sharedstatedir = ${prefix}/com
 localstatedir = ${prefix}/var
 libdir = ${exec_prefix}/lib
 infodir = ${datarootdir}/info
 mandir = ${datarootdir}/man
-includedir = ${prefix}/include
+includedir = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include
 oldincludedir = /usr/include
 
 DESTDIR =
@@ -64,19 +64,19 @@ host_alias =
 host_triplet = x86_64-unknown-linux-gnu
 target_alias = 
 target_triplet = x86_64-unknown-linux-gnu
-CC = gcc
+CC = mipsel-linux-gcc
 MAKEINFO = makeinfo
 PACKAGE = sopwith
 PKG_CONFIG = @PKG_CONFIG@
-RANLIB = ranlib
-SDL_CFLAGS = -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
-SDL_CONFIG = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/bin//sdl-config
-SDL_LIBS = -L/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/lib -lSDL -lpthread
+RANLIB = mipsel-linux-ranlib
+SDL_CFLAGS = -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT
+SDL_CONFIG = /run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr//bin/sdl-config
+SDL_LIBS = -L/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/lib -lSDL -lpthread
 SOPWITH_BINS =  sopwith
 SOPWITH_SUBDIRS =  sdl
 VERSION = 1.8.4
 
-CFLAGS = -g -O2 -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/mipsel-linux-uclibc/mipsel-buildroot-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -I..
+CFLAGS = -g -O2 -I/run/media/raboten/c03df044-bb85-4f9c-a53f-e537b8a024a0/buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/SDL -D_GNU_SOURCE=1 -D_REENTRANT -I..
 
 noinst_LIBRARIES = libsdlsopwith.a
 
