@@ -37,13 +37,32 @@
 
 #include "vid_vga.c"
 
+
+#define	BUTTON_UP		SDLK_UP			// Up
+#define	BUTTON_DOWN		SDLK_DOWN		// Down
+#define	BUTTON_LEFT		SDLK_LEFT		// Left
+#define	BUTTON_RIGHT	SDLK_RIGHT		// Right
+#define	BUTTON_START	SDLK_RETURN		// Start
+#define	BUTTON_SELECT	SDLK_ESCAPE		// Select
+#define	BUTTON_A		SDLK_LCTRL		// Right button (A)
+#define	BUTTON_B		SDLK_LALT		// Bottom button (B)
+#define	BUTTON_X		SDLK_SPACE		// Top button (GCW Y, A320 X)
+#define	BUTTON_Y		SDLK_LSHIFT		// Left button (GCW X, A320 Y)
+#define	BUTTON_L		SDLK_TAB		// L
+#define	BUTTON_R		SDLK_BACKSPACE	// R
+#define	BUTTON_L2		SDLK_PAGEUP		// L2
+#define	BUTTON_R2		SDLK_PAGEDOWN	// R2
+#define	BUTTON_L3		SDLK_KP_DIVIDE	// L3
+#define	BUTTON_R3		SDLK_KP_PERIOD	// R3
+#define	BUTTON_MENU		SDLK_END		// POWER
+
 // lcd mode to emulate my old laptop i used to play sopwith on :)
 
 //#define LCD
 
 static SDL_Color cga_pal[] = {
 #ifdef LCD
-	{213, 226, 138}, {150, 160, 150}, 
+	{213, 226, 138}, {150, 160, 150},
 	{120, 120, 160}, {0, 20, 200},
 #else
 	{0, 0, 0}, {0, 255, 255},
@@ -52,7 +71,7 @@ static SDL_Color cga_pal[] = {
 };
 
 BOOL vid_fullscreen = FALSE;
-BOOL vid_double_size = TRUE;
+BOOL vid_double_size = FALSE;
 
 BOOL use_custom_keys = FALSE;
 char custom_keys[NUM_KEYS];
@@ -105,8 +124,8 @@ SDL_Surface *surface_from_sopsym(sopsym_t *sym)
 		return NULL;
 
 	// set palette
-	
-	SDL_SetColors(surface, cga_pal, 0, sizeof(cga_pal)/sizeof(*cga_pal));	
+
+	SDL_SetColors(surface, cga_pal, 0, sizeof(cga_pal)/sizeof(*cga_pal));
 
 	SDL_LockSurface(surface);
 
@@ -162,7 +181,7 @@ void Vid_Update()
 
 	if (vid_double_size)
 		Vid_UpdateScaled();
-	else 
+	else
 		SDL_BlitSurface(screenbuf, NULL, screen, NULL);
 
 	SDL_UpdateRect(screen, 0, 0, screen->w, screen->h);
@@ -202,7 +221,7 @@ static void set_icon(sopsym_t *sym)
 				mask[i / 8] = 0;
 			}
 
-			if (pixels[i]) 
+			if (pixels[i])
 				mask[i / 8] |= 0x01;
 
 			++i;
@@ -252,7 +271,7 @@ BOOL Load_Custom_Keys()
    if (! file_path)
      return FALSE;
    sprintf(file_path, "%s/.sopwith/keys", home_dir);
-   
+
    // try to open key file
    key_file = fopen(file_path, "r");
    if (key_file)
@@ -261,9 +280,9 @@ BOOL Load_Custom_Keys()
      // something goes wrong
      for (index = 0; index < NUM_KEYS; index++)
          custom_keys[index] = index;
- 
+
       // load keys from the file
-      status = fgets(line, 256, key_file); 
+      status = fgets(line, 256, key_file);
       while (status)
       {
          if (! strncmp(line, "pullup", 6) )
@@ -297,11 +316,11 @@ BOOL Load_Custom_Keys()
    }   // end of we opened thefile
    free(file_path);
 
-   /* debug stuff 
+   /* debug stuff
    for (index = 0; index < NUM_KEYS; index++)
       printf("%d %c\n", index, custom_keys[index]);
    */
-   return TRUE;   
+   return TRUE;
 }
 
 
@@ -314,7 +333,7 @@ void Create_Custom_File()
    char *path_to_file;
    FILE *key_file;
    char *home_dir;
-  
+
    #ifndef WIN32
    home_dir = getenv("HOME");
    #else
@@ -436,7 +455,7 @@ void Vid_Init()
 	fflush(stdout);
 
 	screenbuf = SDL_CreateRGBSurface(0, SCR_WDTH, SCR_HGHT, 8,
-					 0, 0, 0, 0);	
+					 0, 0, 0, 0);
 	vid_vram = screenbuf->pixels;
 	vid_pitch = screenbuf->pitch;
 
@@ -513,29 +532,28 @@ sopkey_t translate_custom_key(int the_key)
 
 static sopkey_t translate_key(int sdl_key)
 {
-        if (use_custom_keys)
-          return translate_custom_key(sdl_key);
+
 	switch (sdl_key) {
-	case SDLK_LEFT:
-	case SDLK_COMMA:
+	case BUTTON_LEFT:
+	case BUTTON_UP:
 		return KEY_PULLUP;
-	case SDLK_RIGHT:
-	case SDLK_SLASH:
+	case BUTTON_RIGHT:
+	case BUTTON_DOWN:
 		return KEY_PULLDOWN;
-	case SDLK_DOWN:
-	case SDLK_PERIOD:
+	// case SDLK_DOWN:
+	case BUTTON_Y:
 		return KEY_FLIP;
-	case SDLK_x:
+	case BUTTON_L:
 		return KEY_ACCEL;
-	case SDLK_z:
+	case BUTTON_R:
 		return KEY_DECEL;
-	case SDLK_b:
+	case BUTTON_B:
 		return KEY_BOMB;
-	case SDLK_SPACE:
+	case BUTTON_A:
 		return KEY_FIRE;
 	case SDLK_h:
 		return KEY_HOME;
-	case SDLK_v:
+	case BUTTON_X:
 		return KEY_MISSILE;
 	case SDLK_c:
 		return KEY_STARBURST;
@@ -557,10 +575,10 @@ static void getevents()
 		case SDL_KEYDOWN:
 			if (event.key.keysym.sym == SDLK_LALT)
 				altdown = 1;
-			else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL)
-				ctrldown = 1;
-			else if (ctrldown &&
-				 (event.key.keysym.sym == SDLK_c ||
+			// else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL)
+			// 	ctrldown = 1;
+			else if (
+				 (event.key.keysym.sym == SDLK_ESCAPE ||
 				  event.key.keysym.sym == SDLK_BREAK)) {
 				++ctrlbreak;
 				if (ctrlbreak >= 3) {
@@ -585,11 +603,7 @@ static void getevents()
 				keysdown[translated] |= 3;
 			break;
 		case SDL_KEYUP:
-			if (event.key.keysym.sym == SDLK_LALT)
-				altdown = 0;
-			else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL)
-				ctrldown = 0;
-			else {
+			 {
 				translated = translate_key(event.key.keysym.sym);
 				if (translated)
 					keysdown[translated] &= ~1;
@@ -604,7 +618,7 @@ int Vid_GetKey()
 	int l;
 
 	getevents();
-	
+
 	return input_buffer_pop();
 }
 
@@ -615,7 +629,7 @@ BOOL Vid_GetCtrlBreak()
 }
 
 //-----------------------------------------------------------------------
-// 
+//
 // $Log: video.c,v $
 // Revision 1.3  2003/03/26 13:53:29  fraggle
 // Allow control via arrow keys
@@ -634,7 +648,7 @@ BOOL Vid_GetCtrlBreak()
 // sdh 26/03/2002: now using platform specific vga code for drawing stuff
 //                 (#include "vid_vga.c")
 //                 rename CGA_ to Vid_
-// sdh 17/11/2001: buffered input for keypresses, 
+// sdh 17/11/2001: buffered input for keypresses,
 //                 CGA_GetLastKey->CGA_GetKey
 // sdh 07/11/2001: add CGA_Reset
 // sdh 21/10/2001: added cvs tags

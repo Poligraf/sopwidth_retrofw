@@ -31,9 +31,9 @@ int Vid_GetGameKeys()
 	int i, c = 0;
 
 	// empty input buffer, get new key state
-	
+
 	while (Vid_GetKey());
-	
+
 	if (Vid_GetCtrlBreak()) {
 		c |= K_BREAK;
 	}
@@ -75,7 +75,7 @@ int Vid_GetGameKeys()
 	}
 
 	// clear bits in key array
-	
+
 	for (i=0; i<NUM_KEYS; ++i) {
 		keysdown[i] &= ~2;
 	}

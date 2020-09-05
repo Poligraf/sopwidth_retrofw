@@ -223,7 +223,7 @@ void dispguages(OBJECTS *ob)
 	if (conf_missiles) {
 
 		// missiles
-		
+
 		dispgge(x += sep, ob->ob_missiles, MAXMISSILES, ob->ob_clr);
 
 // starburst (flares)
@@ -721,7 +721,7 @@ static void inittarg()
 		ob->ob_life = i;
 
 		if (playmode != PLAYMODE_ASYNCH)
-			ob->ob_owner = 
+			ob->ob_owner =
 				&nobjects[(i < MAX_TARG / 2
 					   && i > MAX_TARG / 2 - 4)
 						? 0 : 1];
@@ -758,7 +758,7 @@ void initexpl(OBJECTS * obop, int small)
 	obotype = obo->ob_type;
 	if (obotype == TARGET && obo->ob_orient == 2) {
 		ic = 1;
-                // adding in option here for large oil tank explosions 
+                // adding in option here for large oil tank explosions
                 // - Jesse
                 if (conf_explosions)
                    speed = gminspeed * 4 / 3;
@@ -768,7 +768,7 @@ void initexpl(OBJECTS * obop, int small)
 		ic = small ? 6 : 2;
 		speed = gminspeed >> ((explseed & 7) != 7);
 	}
-	mansym = obotype == PLANE 
+	mansym = obotype == PLANE
 		 && (obo->ob_state == FLYING || obo->ob_state == WOUNDED);
 
 	for (i = 1; i <= 15; i += ic) {
@@ -1002,7 +1002,7 @@ void swinitlevel()
 		currgame = &swgames[0];
 
 		// single player
-		
+
 		initplyr(NULL);
 		initcomp(NULL);
 		initcomp(NULL);
@@ -1027,7 +1027,7 @@ void swrestart()
 	OBJECTS *ob;
 	int inc;
 	int time;
-		
+
 	if (endsts[player] == WINNER) {
 		ob = &nobjects[player];
 		inc = 0;
@@ -1038,7 +1038,7 @@ void swrestart()
 			dispscore(ob);
 
 			Vid_Update();
-			
+
 			// sdh 27/10/2001: use new time code for delay
 
 			time = Timer_GetMS();
@@ -1054,7 +1054,7 @@ void swrestart()
 
 		// sh 28/10/2001: go back to the title screen
 
-		playmode = PLAYMODE_UNSET;
+		playmode = PLAYMODE_COMPUTER;
 	}
 
 	// sdh 27/10/2001: moved all level init stuff into swinitlevel
@@ -1080,7 +1080,7 @@ void swinit(int argc, char *argv[])
 	int i;
 
 	// store global argc/argv
-	
+
 	g_argc = argc;
 	g_argv = argv;
 
@@ -1109,7 +1109,7 @@ void swinit(int argc, char *argv[])
 		exit(1);
 	}
 #endif
-	
+
 	// sdh 29/10/2001: load config from configuration file
 
         soundflg = 1;      // assume off by default
@@ -1139,7 +1139,7 @@ void swinit(int argc, char *argv[])
 			conf_missiles = 1;
                 else if (!strcasecmp(argv[i], "-e"))
                         conf_explosions = 0;
-		else 
+		else
 #ifdef TCPIP
 			if (!strcasecmp(argv[i], "-l")) {
 			a = 1;
@@ -1153,7 +1153,7 @@ void swinit(int argc, char *argv[])
 				fprintf(stderr, "insufficient arguments to -j\n");
 				exit(-1);
 			}
-		} else 
+		} else
 #endif
 		{
 			puts(helptxt);
@@ -1186,18 +1186,18 @@ void swinit(int argc, char *argv[])
 
 	//        explseed = histinit( explseed );
 	initsndt();
-	initgrnd();           // needed for title screen 
-	
+	initgrnd();           // needed for title screen
+
 	// sdh 26/03/2002: remove swinitgrph
 
 	// set playmode if we can, from command line options
 
-	playmode = 
+	playmode =
 		n ? PLAYMODE_NOVICE :
 		s ? PLAYMODE_SINGLE :
 		c ? PLAYMODE_COMPUTER :
 		a ? PLAYMODE_ASYNCH :
-		PLAYMODE_UNSET;
+		PLAYMODE_COMPUTER;
 
 	// sdh 28/10/2001: moved getmode into swmain
 	// sdh 27/10/2001: moved all level init stuff into swinitlevel
@@ -1279,4 +1279,3 @@ void swinit(int argc, char *argv[])
 // 84-02-02        Development
 //
 //---------------------------------------------------------------------------
-
