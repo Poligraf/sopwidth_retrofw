@@ -1112,7 +1112,7 @@ void swinit(int argc, char *argv[])
 
 	// sdh 29/10/2001: load config from configuration file
 
-        soundflg = 1;      // assume off by default
+        soundflg = 0;      // assume off by default
 	swloadconf();
 
 	for (i=1; i<argc; ++i) {

@@ -555,7 +555,7 @@ static sopkey_t translate_key(int sdl_key)
 		return KEY_HOME;
 	case BUTTON_X:
 		return KEY_MISSILE;
-	case SDLK_c:
+	case BUTTON_START:
 		return KEY_STARBURST;
 	case SDLK_s:
 		return KEY_SOUND;
