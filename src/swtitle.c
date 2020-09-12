@@ -121,7 +121,7 @@ void swtitln()
 	dispinit = TRUE;
 	swground();
 
-	// sdh 28/06/2002: cleared this up a lot, no more 
+	// sdh 28/06/2002: cleared this up a lot, no more
 	// creating objects etc
 
 	Vid_DispSymbol(260+X_OFFSET, 180, symbol_plane[0][0], 1);
@@ -289,8 +289,8 @@ static BOOL getskill()
 {
 	for (;;) {
 		clrprmpt();
-		swputs("Key: N - novice player\r\n");
-		swputs("     E - expert player\r\n");
+		swputs("Key: L - Learning mode\r\n");
+		swputs("     X - Xpert player\r\n");
 
 		Vid_Update();
 
@@ -298,10 +298,10 @@ static BOOL getskill()
 		if (ctlbreak())
 			swend(NULL, NO);
 		switch (toupper(swgetc() & 0xff)) {
-		case 'N':
+		case 9:
 			playmode = PLAYMODE_NOVICE;
 			return 1;
-		case 'E':
+		case K_SHOT:
 			playmode = PLAYMODE_SINGLE;
 			return 1;
 		case 27:
@@ -319,13 +319,10 @@ void getgamemode()
 
 		clrprmpt();
 
-		swputs("Key: S - single player\r\n");
-		swputs("     C - single player against computer\r\n");
-#ifdef TCPIP
-		swputs("     N - network game\r\n");
-#endif
-		swputs("     O - game options\r\n");
-                swputs("     Press CTRL-C to exit");
+		swputs("Key: L - Learning mode\r\n");
+		swputs("     x - Xpert player + computer\r\n");
+
+                swputs("     Press Select to exit");
 		Vid_Update();
 
 		if (ctlbreak())
@@ -334,14 +331,14 @@ void getgamemode()
 		c = toupper(swgetc() & 0xff);
 
 		switch (c) {
-		case 'S':
+		case 9:
 			if (getskill())
 				return;
 			break;
-		case 'O': 
+		case 'O':
 			setconfig();
 			break;
-		case 'C':
+		case K_SHOT:
 			playmode = PLAYMODE_COMPUTER;
 			return;
 #ifdef TCPIP
@@ -396,4 +393,3 @@ void getgamemode()
 // 84-02-02        Development
 //
 //---------------------------------------------------------------------------
-

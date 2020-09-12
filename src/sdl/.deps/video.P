@@ -67,10 +67,10 @@ video.o: video.c \
  ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/uClibc_clk_tck.h \
  ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/sys/stat.h \
  ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/stat.h \
- ../video.h ../sw.h ../std.h \
+ video.h ../sw.h ../std.h \
  ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/setjmp.h \
  ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/setjmp.h \
- ../swsymbol.h ../../config.h ../sw.h ../vid_vga.c ../video.h ../swdisp.h \
+ ../swsymbol.h ../sw.h ../../config.h ../vid_vga.c ../video.h ../swdisp.h \
  ../swground.h ../swgrpha.h ../swmain.h ../swutil.h
 video.c :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/SDL/SDL.h :
@@ -141,14 +141,14 @@ video.c :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/uClibc_clk_tck.h :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/sys/stat.h :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/stat.h :
-../video.h :
+video.h :
 ../sw.h :
 ../std.h :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/setjmp.h :
 ../../../buildroot/output/host/mipsel-RetroFW-linux-uclibc/sysroot/usr/include/bits/setjmp.h :
 ../swsymbol.h :
-../../config.h :
 ../sw.h :
+../../config.h :
 ../vid_vga.c :
 ../video.h :
 ../swdisp.h :

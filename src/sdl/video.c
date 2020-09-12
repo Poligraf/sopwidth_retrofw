@@ -541,7 +541,7 @@ static sopkey_t translate_key(int sdl_key)
 	case BUTTON_DOWN:
 		return KEY_PULLDOWN;
 	// case SDLK_DOWN:
-	case BUTTON_Y:
+	case BUTTON_X:
 		return KEY_FLIP;
 	case BUTTON_L:
 		return KEY_ACCEL;
@@ -553,7 +553,7 @@ static sopkey_t translate_key(int sdl_key)
 		return KEY_FIRE;
 	case SDLK_h:
 		return KEY_HOME;
-	case BUTTON_X:
+	case BUTTON_Y:
 		return KEY_MISSILE;
 	case BUTTON_START:
 		return KEY_STARBURST;
@@ -573,11 +573,11 @@ static void getevents()
 	while (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_KEYDOWN:
-			if (event.key.keysym.sym == SDLK_LALT)
-				altdown = 1;
+			// if (event.key.keysym.sym == SDLK_LALT)
+			// 	altdown = 1;
 			// else if (event.key.keysym.sym == SDLK_LCTRL || event.key.keysym.sym == SDLK_RCTRL)
 			// 	ctrldown = 1;
-			else if (
+			if (
 				 (event.key.keysym.sym == SDLK_ESCAPE ||
 				  event.key.keysym.sym == SDLK_BREAK)) {
 				++ctrlbreak;

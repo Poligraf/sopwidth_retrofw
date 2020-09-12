@@ -1197,7 +1197,7 @@ void swinit(int argc, char *argv[])
 		s ? PLAYMODE_SINGLE :
 		c ? PLAYMODE_COMPUTER :
 		a ? PLAYMODE_ASYNCH :
-		PLAYMODE_COMPUTER;
+		PLAYMODE_UNSET;
 
 	// sdh 28/10/2001: moved getmode into swmain
 	// sdh 27/10/2001: moved all level init stuff into swinitlevel
